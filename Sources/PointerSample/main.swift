@@ -69,10 +69,10 @@ func load() {
 		.assumingMemoryBound(to: C.self)
 	let child = childPointer.move()
 	parent.children.append(child)
-	childPointer.deallocate(capacity: 1)
+	childPointer.deallocate()
 	
-	parentPointer.deinitialize()
-	parentPointer.deallocate(capacity: 1)
+	parentPointer.deinitialize(count: 1)
+	parentPointer.deallocate()
 	
 	print("End: \(parent.value)")
 	print("End: \(parent.children.map{$0.value})")
